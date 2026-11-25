@@ -1,8 +1,8 @@
-# 🧠 C://GHOST Brain — v1.0.0 (Génesis: Patrón LLM-Wiki y Enfoque Dual)
+# 🧠 C://GHOST Brain — v2.0.0 («Semilla del Edén»)
 
-Primera generación histórica de la **Metodología C://GHOST**: resuelve la *Amnesia del Chat* de los LLMs mediante el **Repositorio de Conciencia (`STATUS.md`)**, la separación entre **Estratega ("Steve Jobs")** y **Ejecutor ("Steve Wozniak")**, y un manual paso a paso accesible incluso sin conocimientos previos de programación.
+Segunda generación de la **Metodología C://GHOST**: formaliza los **10 Protocolos Maestros**, la tríada de memoria con ventana deslizante (`STATUS.md ≤ 100 líneas`, `IDEAS.md`, `CHANGELOG.md`), el **Enrutamiento Sin Comandos (Zero-Command Routing)** y las **Skills Progresivas** en `.agents/skills/`.
 
-## 📖 Manuales e Investigación incluidos en `v1.0.0`
-- [Manual de Usuario v1.0 — Paso a Paso para Principiantes](docs/manuals/MANUAL_V1_GENESIS.md)
-- [Manual Interactivo HTML con Diagramas](docs/manuals/Manual_Metodologia_CGHOST.html)
-- [Informe Científico y Empírico de la Metodología](docs/informe_cientifico_metodologia.md)
+## 📖 Manuales disponibles hasta `v2.0.0`
+- [Manual v1.0 — Génesis (Principiantes)](docs/manuals/MANUAL_V1_GENESIS.md)
+- [Manual v2.0 — Semilla del Edén (De Cero a Operar Solo)](docs/manuals/MANUAL_V2_SEMILLA_DEL_EDEN.md)
+- [Informe Científico de la Metodología](docs/informe_cientifico_metodologia.md)
