@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual de Usuario: Metodología C-GHOST</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            themeVariables: {
+                primaryColor: '#111111',
+                primaryTextColor: '#ededed',
+                primaryBorderColor: '#333333',
+                lineColor: '#666666',
+                secondaryColor: '#1a1a1a',
+                tertiaryColor: '#111111'
+            }
+        });
+    </script>
+    <style>
+        :root {
+            --bg-base: #000000;
+            --bg-surface: #0a0a0a;
+            --bg-elevated: #111111;
+            --border-color: #222222;
+            --border-hover: #333333;
+            
+            --text-primary: #ededed;
+            --text-secondary: #a1a1aa;
+            
+            --accent-color: #ededed; /* Clean white accent */
+            --accent-blue: #3b82f6; /* Subtle blue for highlights */
+            
+            --sidebar-width: 280px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* TIPOGRAFÍA */
+        h1, h2, h3 {
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-top: 0;
+        }
+
+        /* SIDEBAR (MENÚ LATERAL) */
+        .sidebar {
+            width: var(--sidebar-width);
+            background-color: var(--bg-surface);
+            border-right: 1px solid var(--border-color);
+            height: 100vh;
+            overflow-y: auto;
+            position: fixed;
+            left: 0;
+            top: 0;
+            display: flex;
+            flex-direction: column;
+            z-index: 100;
+        }
+
+        .sidebar-header {
+            padding: 32px 24px 24px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .sidebar-header h2 {
+            margin: 0;
+            font-size: 1.25rem;
+            color: var(--text-primary);
+        }
+
+        .sidebar-header p {
+            margin: 4px 0 0 0;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .sidebar-nav {
+            padding: 16px 12px;
+            flex-grow: 1;
+        }
+
+        .sidebar-nav a {
+            display: block;
+            padding: 8px 12px;
+            margin-bottom: 4px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            border-radius: 6px;
+            transition: all 0.15s ease;
+        }
+
+        .sidebar-nav a:hover, .sidebar-nav a.active {
+            background-color: var(--bg-elevated);
+            color: var(--text-primary);
+        }
+
+        /* MAIN CONTENT (CONTENIDO PRINCIPAL) */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            flex-grow: 1;
+            height: 100vh;
+            overflow-y: auto;
+            padding: 64px 80px;
+            scroll-behavior: smooth;
+        }
+
+        .content-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-top: 64px;
+            margin-bottom: 24px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 12px;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 48px;
+            font-weight: 400;
+        }
+
+        p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        ul, ol {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* TARJETAS (CARDS) */
+        .card {
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 32px;
+            margin-bottom: 24px;
+            transition: border-color 0.2s ease;
+        }
+        
+        .card:hover {
+            border-color: var(--border-hover);
+        }
+
+        /* DIAGRAMA INTERACTIVO */
+        .interactive-viewer {
+            position: relative;
+            background-color: var(--bg-base);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin: 32px 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 500px;
+        }
+
+        .interactive-viewer:fullscreen {
+            background-color: var(--bg-base);
+            height: 100vh;
+        }
+
+        .mermaid-wrapper {
+            transition: transform 0.1s ease;
+            cursor: grab;
+            transform-origin: center center;
+        }
+
+        .mermaid-wrapper:active {
+            cursor: grabbing;
+        }
+
+        .viewer-controls {
+            position: absolute;
+            bottom: 24px;
+            right: 24px;
+            z-index: 10;
+            display: flex;
+            gap: 12px;
+        }
+
+        .viewer-btn {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 8px 16px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            backdrop-filter: blur(4px);
+        }
+
+        .viewer-btn:hover {
+            background: #ffffff;
+            color: #000000;
+            border-color: #ffffff;
+        }
+
+        /* CÓDIGO Y PROMPTS */
+        pre {
+            background-color: var(--bg-base);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 24px;
+            overflow-x: auto;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            position: relative;
+            margin: 24px 0;
+        }
+
+        code {
+            font-family: 'JetBrains Mono', monospace;
+            background-color: var(--bg-elevated);
+            color: var(--text-primary);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.9em;
+            border: 1px solid var(--border-color);
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.8rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .copy-btn:hover {
+            background: var(--text-primary);
+            color: var(--bg-base);
+            border-color: var(--text-primary);
+        }
+
+        .prompt-box {
+            border-left: 2px solid var(--text-primary);
+            background: var(--bg-base);
+            padding: 20px 24px;
+            margin: 24px 0;
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        .alert-box {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-color);
+            padding: 16px 20px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        
+        .alert-box strong {
+            color: var(--text-primary);
+        }
+
+        /* TABLAS */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 24px;
+            font-size: 0.9rem;
+        }
+        th, td {
+            border-bottom: 1px solid var(--border-color);
+            padding: 16px 12px;
+            text-align: left;
+            color: var(--text-secondary);
+        }
+        th {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        /* TOOLTIP ELEGANTE */
+        .clean-tooltip {
+            position: absolute;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 16px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            z-index: 1000;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            max-width: 280px;
+            line-height: 1.5;
+        }
+        
+        .clean-tooltip strong {
+            color: var(--text-primary);
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .footer {
+            margin-top: 80px;
+            padding-top: 32px;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- TOOLTIP ELEMENT -->
+    <div id="tooltip" class="clean-tooltip"></div>
+
+    <!-- MENÚ LATERAL INTERACTIVO -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h2>C-GHOST</h2>
+            <p>Guía de Usuario</p>
+        </div>
+        <div class="sidebar-nav">
+            <a href="#teoria">00. Teoría (Wiki)</a>
+            <a href="#entorno">01. Configurar Entorno</a>
+            <a href="#memoria">02. El Repositorio</a>
+            <a href="#cerebro">03. El Cerebro</a>
+            <a href="#semilla">04. Reglas (Semilla)</a>
+            <a href="#prompt">05. Primer Prompt</a>
+            <a href="#flujo">06. Visor Interactivo</a>
+            <a href="#delegacion">07. Delegación</a>
+            <a href="#visual">08. Lógica Visual (Novatos)</a>
+        </div>
+    </div>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <div class="main-content">
+        <div class="content-wrapper">
+            
+            <h1>Metodología C-GHOST</h1>
+            <div class="subtitle">Ecosistema Cognitivo de Agentes IA.</div>
+
+            <div class="alert-box">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                <div>
+                    <strong>Nota:</strong> Este manual es un tutorial "dummy-proof". Asume que tienes cero conocimientos de código. Aprenderás a dominar a cualquier IA (ChatGPT, Claude, Cursor) creando un ecosistema que nunca olvida.
+                </div>
+            </div>
+
+            <!-- TEORÍA -->
+            <section id="teoria">
+                <h2>00. Teoría: La Amnesia de la Máquina</h2>
+                <div class="card">
+                    <p>Las ventanas de chat de IA tienen una falla crítica: <strong>son efímeras</strong>. A medida que hablas con ChatGPT o Claude, la "ventana de contexto" se llena. La IA comienza a olvidar las instrucciones iniciales, alucina, y pierde el rumbo del proyecto.</p>
+                    
+                    <p>Para solucionar esto, C-GHOST emplea el patrón <strong>LLM-Wiki de Andrej Karpathy</strong>. Se basa en dos pilares:</p>
+                    <ul>
+                        <li><strong style="color: var(--text-primary);">Pilar A (Memoria Inmutable):</strong> En lugar de depender de la memoria del chat, obligamos a la IA a escribir todo en un archivo físico llamado <code>STATUS.md</code>. La IA lee este archivo en cada interacción para recuperar el 100% de su memoria.</li>
+                    </ul>
+                    
+                    <div class="mermaid" style="margin: 32px 0;">
+                        graph LR
+                          subgraph Chat Tradicional (Amnesia)
+                            U1[Usuario] -->|Habla con| LLM1[IA]
+                            LLM1 -.->|Se satura y olvida| L[Límite de Memoria]
+                          end
+                          
+                          subgraph Ecosistema C-GHOST
+                            U2[Usuario] -->|Habla con| LLM2[IA]
+                            LLM2 <-->|Lee y Escribe| S[(STATUS.md\nMemoria Permanente)]
+                          end
+                    </div>
+                    
+                    <ul>
+                        <li><strong style="color: var(--text-primary);">Pilar B (Inteligencia de Enjambre):</strong> Un "Jobs vs Wozniak". Una sola IA no puede pensar la estrategia general y a la vez escribir 5,000 líneas de código sin equivocarse. Debes usar una IA Estratega para pensar, y delegar el trabajo sucio a una IA Ejecutora.</li>
+                    </ul>
+
+                    <div class="mermaid" style="margin: 32px 0;">
+                        graph TD
+                          U[Usuario / Comandante] -->|Da la visión| E[IA Estratega\n'Steve Jobs']
+                          E <-->|Planifica y Actualiza| S[(STATUS.md)]
+                          E -->|Delega trabajo pesado| W[IA Ejecutora\n'Steve Wozniak']
+                          W <-->|Lee reglas y reporta| S
+                          W -->|Escribe Archivos| C[Código / Proyecto]
+                    </div>
+                </div>
+            </section>
+
+            <!-- PASO 1 -->
+            <section id="entorno">
+                <h2>01. Preparación del Entorno</h2>
+                <div class="card">
+                    <p>Vamos a construir la base en tu computadora, es muy sencillo:</p>
+                    <ol>
+                        <li>Crea una <strong>nueva carpeta</strong> en tu escritorio. Ponle el nombre de tu proyecto (ej: <code>Mi_Empresa</code>).</li>
+                        <li>Entra dentro de esa carpeta. Acabas de crear la base física de tu Ecosistema.</li>
+                    </ol>
+                </div>
+            </section>
+
+            <!-- PASO 2 -->
+            <section id="memoria">
+                <h2>02. El Repositorio de Conciencia</h2>
+                <div class="card">
+                    <p>Este será el disco duro mental de tu IA.</p>
+                    <ol>
+                        <li>Estando dentro de tu carpeta principal, crea un archivo de texto plano.</li>
+                        <li>Nómbralo exactamente así: <code>STATUS.md</code>.</li>
+                        <li>Déjalo <strong>completamente en blanco</strong>. ¡La IA se encargará de escribir su propia memoria ahí!</li>
+                    </ol>
+                </div>
+            </section>
+
+            <!-- PASO 3 -->
+            <section id="cerebro">
+                <h2>03. Estructura del Cerebro</h2>
+                <div class="card">
+                    <p>Ahora le daremos a la IA sus leyes inquebrantables (Los 10 Protocolos).</p>
+                    <ol>
+                        <li>Dentro de tu carpeta del proyecto, crea una subcarpeta llamada <code>.agents</code>. <em>(Nota: ¡No olvides el punto al principio del nombre!)</em>.</li>
+                        <li>Entra en esa nueva subcarpeta <code>.agents</code>.</li>
+                        <li>Crea un archivo de texto y nómbralo exactamente: <code>AGENTS.md</code>.</li>
+                        <li>Abre este archivo con un Bloc de Notas o editor de texto.</li>
+                    </ol>
+                </div>
+            </section>
+
+            <!-- PASO 4 -->
+            <section id="semilla">
+                <h2>04. La Semilla del Edén (Inyección)</h2>
+                <div class="card">
+                    <p>Haz clic en "Copiar", pégalo dentro de tu archivo <code>AGENTS.md</code>, y guárdalo.</p>
+                    
+                    <pre><button class="copy-btn" onclick="copyCode(this)">Copiar</button><code id="eden-seed"># Reglas de Agentes - [Nombre de tu Proyecto]
+
+## 🤖 Perfiles de Agentes
+- Eres el Estratega. Tu enfoque es la lógica pura, arquitectura a largo plazo y revisión crítica.
+- Si delegas trabajo a otras IAs o herramientas, ellos asumen el rol de Ejecutores (trabajo pesado y repetitivo).
+
+## 📜 Metodología C://GHOST (Integración de Protocolos Maestros)
+*Por decreto del Protocolo 10 (Semilla del Edén), el presente proyecto hereda y está sujeto a los 10 Protocolos de Gobernanza.*
+
+### ⚙️ BUCLE COGNITIVO DE OPERACIÓN (ALGORITMO MAESTRO)
+Procesa tus acciones en este orden secuencial estricto cada vez que recibas un prompt:
+- **FASE 1 (INICIO):** Ejecuta `Protocolo 0` y `Protocolo 1` (Lee memoria y planifica).
+- **FASE 2 (EJECUCIÓN):** Evalúa el entorno (`Protocolo 5`), delega tareas (`Protocolo 2` y `3`), y si pierdes contexto usa la Caja Negra (`Protocolo 8`).
+- **FASE 3 (CIERRE):** Actualiza memoria (`Protocolo 0` y `4`), documenta ideas (`Protocolo 6`) y respalda tu trabajo (`Protocolo 7`).
+
+### 🧠 PROTOCOLO 0 — REPOSITORIO DE CONCIENCIA (OBLIGATORIO)
+1. **LEER** el archivo `STATUS.md` local antes de actuar.
+2. **ENTENDER** el contexto y la tarea activa.
+3. **ACTUALIZAR** el `STATUS.md` al completar cualquier acción significativa.
+
+### 🎭 PROTOCOLO 1 — MODO DE OPERACIÓN AUTOMÁTICO
+- **Modo Planificador:** Activar para cambios mayores. Crear un plan escrito y esperar aprobación.
+- **Modo Agente:** Activar para ejecución directa de tareas focalizadas.
+
+### 🤝 PROTOCOLO 2 — DELEGACIÓN AL EJECUTOR (ALERTA ZERO-TRUST)
+Delega tareas mecánicas, redacción pesada o extracción masiva a tu Agente Ejecutor (o a otra IA).
+- **Seguridad (Zero-Trust):** NUNCA delegues tareas que involucren archivos confidenciales, contraseñas, o llaves de API a agentes o backends externos.
+
+### 🏆 PROTOCOLO 3 — ECONOMÍA DE FUERZAS
+Selecciona el modelo de IA correcto para la tarea (Modelos complejos para razonamiento, modelos rápidos para tareas mecánicas).
+
+### 📋 PROTOCOLO 4 — CIERRE DE SESIÓN
+Al finalizar tu turno: actualiza "Tarea Activa", mueve la tarea terminada al "Historial de Cambios", y actualiza el "Backlog" en el `STATUS.md`.
+
+### 🔀 PROTOCOLO 5 — BIFURCACIÓN DE ENTORNOS
+Adapta tu lenguaje dependiendo del contexto del proyecto:
+- **Entorno de Software:** Usa comandos técnicos, Git, y terminal.
+- **Entorno de Negocios:** Abstrae la terminología técnica para evitar fricción con el usuario.
+
+### 📚 PROTOCOLO 6 — GESTIÓN DEL CONOCIMIENTO E IDEAS
+Saca las ideas futuras del flujo principal de `STATUS.md` documentándolas en un archivo `IDEAS.md` para no sobrecargar la memoria.
+
+### 🛡️ PROTOCOLO 7 — RED DE SEGURIDAD (RESPALDOS)
+Obligación de salvaguardar el progreso al cierre de sesión.
+- **En Software:** Usa comandos Git (`git commit -m "..."`).
+- **En Negocios:** Recuerda al usuario hacer copias de respaldo manuales.
+
+### 🗃️ PROTOCOLO 8 — LA CAJA NEGRA
+Si se pierde el contexto, solicita explícitamente permiso para consultar los historiales. No asumas información.
+
+### 🖼️ PROTOCOLO 9 — GENERACIÓN DE IMÁGENES (FONDO CIEGO)
+Para inyección visual: omite descripciones del entorno y describe solo al sujeto principal para evitar que la IA alucine la estructura.
+
+### 🏛️ PROTOCOLO 10 — LEYES DE GOBERNANZA SUBORDINADA (PRIME DIRECTIVES)
+1. **Semilla del Edén:** Todo proyecto debe nacer con `STATUS.md` y `AGENTS.md` completos. Está PROHIBIDO resumir los protocolos.
+2. **Mente Colmena:** El conocimiento profundo se documenta para uso global.
+3. **Comandante Override:** El usuario creador tiene autoridad absoluta para saltar protocolos y dar órdenes directas.
+
+### ⚠️ REGLAS LOCALES ESTRICTAS
+1. Antes de iniciar cualquier tarea, debes leer el `STATUS.md`.
+2. Al finalizar, debes actualizar el `STATUS.md`.
+</code></pre>
+                </div>
+            </section>
+
+            <!-- PASO 5 -->
+            <section id="prompt">
+                <h2>05. El Primer Prompt (Despertar)</h2>
+                <div class="card">
+                    <p>Abre tu Inteligencia Artificial favorita (ChatGPT, Claude, Cursor, Antigravity), dale permisos para leer la carpeta de tu proyecto, y envíale este mensaje exacto:</p>
+                    
+                    <div class="prompt-box">
+                        "Lee las reglas en .agents/AGENTS.md y genera el STATUS.md base para este proyecto. El proyecto tratará sobre [ESCRIBE AQUÍ DE QUÉ TRATA]. Al terminar de crearlo, propón un plan estratégico en Modo Planificador."
+                    </div>
+
+                    <p>La IA leerá las reglas, escribirá su propia memoria en el archivo en blanco, y comenzará a trabajar como un profesional.</p>
+                </div>
+            </section>
+
+            <!-- PASO 6 -->
+            <section id="flujo">
+                <h2>06. Visor Interactivo (Flujo de Trabajo)</h2>
+                <div class="card">
+                    <p>Cada vez que le hables a la IA, ella aplicará de forma automática este "Bucle Cognitivo" de 3 pasos. Utiliza la rueda de tu ratón para hacer <strong>Zoom</strong>, arrastra para moverte, o haz clic en "Pantalla Completa". Pasa el cursor sobre un paso para ver su explicación.</p>
+                    
+                    <div class="interactive-viewer" id="diagram-container">
+                        <div class="viewer-controls">
+                            <button class="viewer-btn" onclick="resetZoom()">Restablecer</button>
+                            <button class="viewer-btn" onclick="openFullscreen()">Pantalla Completa</button>
+                        </div>
+                        <div class="mermaid-wrapper" id="mermaid-wrapper">
+                            <div class="mermaid">
+                            graph TD
+                                A([INICIO DE SESIÓN]) --> P0
+                                
+                                subgraph FASE 1: CONCIENCIA
+                                P0[PROTOCOLO 0: Leer STATUS.md] --> P1
+                                P1{PROTOCOLO 1: Modo Operación?}
+                                P1 -- Cambio Mayor --> PM[Modo Planificador]
+                                P1 -- Tarea Directa --> PA[Modo Agente]
+                                end
+
+                                PM --> P5
+                                PA --> P5
+
+                                subgraph FASE 2: EJECUCIÓN
+                                P5[PROTOCOLO 5: Evaluar Entorno] --> P2
+                                P2[PROTOCOLO 2: ¿Delegar? Zero-Trust] --> P3
+                                P3[PROTOCOLO 3: Economía de Fuerzas] --> EXEC
+                                EXEC[[Ejecución de la Tarea]]
+                                end
+
+                                EXEC -. Duda de Contexto .-> P8[PROTOCOLO 8: Caja Negra]
+                                EXEC -. Nueva Idea .-> P6[PROTOCOLO 6: Pensadero IDEAS]
+                                EXEC -. Imagen .-> P9[PROTOCOLO 9: Fondo Ciego]
+
+                                EXEC --> F3
+
+                                subgraph FASE 3: CIERRE
+                                F3[PROTOCOLO 0: Actualizar STATUS.md] --> P4
+                                P4[PROTOCOLO 4: Mover a Historial] --> P7
+                                P7[PROTOCOLO 7: Respaldo Git/Manual]
+                                end
+
+                                P7 --> END([FIN DE SESIÓN])
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PASO 7 -->
+            <section id="delegacion">
+                <h2>07. Inteligencia de Enjambre</h2>
+                <div class="card">
+                    <p>Si usas un ecosistema de IA múltiple, usa la IA más inteligente para la estrategia (Estratega) y una más rápida para escribir código (Ejecutor):</p>
+                    
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Tipo de Tarea (Estratega)</th>
+                                <th>Modelo Óptimo Recomendado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Arquitectura nueva, decisiones críticas</td>
+                                <td>Claude Opus / GPT-4</td>
+                            </tr>
+                            <tr>
+                                <td>Desarrollo de features, refactorización</td>
+                                <td>Claude Sonnet / Gemini Advanced</td>
+                            </tr>
+                            <tr>
+                                <td>Búsquedas rápidas, análisis de logs</td>
+                                <td>Gemini Flash / Claude Haiku</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3 style="margin-top: 40px; margin-bottom: 16px; font-size: 1.1rem;">Prompt de Delegación (Ejemplo)</h3>
+                    <p>Cuando decidas delegarle el trabajo al Ejecutor, usa este prompt:</p>
+                    <div class="prompt-box">
+                        "Pídele al Agente Ejecutor (OpenCode/Cursor) que genere los archivos base según el plan. Adviértele que debe cumplir el Protocolo 0: leer el STATUS.md local antes de proceder, y actualizarlo al terminar."
+                    </div>
+                </div>
+            </section>
+
+            <!-- PASO 8 VISUAL -->
+            <section id="visual">
+                <h2>08. Explicación Visual de los 10 Protocolos (Para Principiantes)</h2>
+                
+                <p>Si alguna vez te preguntas "¿Por qué la IA necesita tantas reglas?", aquí tienes la respuesta traducida al mundo real. Cada protocolo tiene una razón lógica de existir para evitar que la IA se equivoque.</p>
+
+                <div class="card">
+                    <h3 style="color: var(--text);">Protocolo 0: La Libreta de Apuntes (STATUS.md)</h3>
+                    <p><strong>El Problema:</strong> La IA tiene memoria a corto plazo. Si el chat se alarga, olvidará de qué trata el proyecto.<br>
+                    <strong>La Solución:</strong> Obligar a la IA a escribir todo lo importante en un archivo físico (<code>STATUS.md</code>).</p>
+                    <div class="mermaid" style="margin-top:20px;">
+                        graph LR
+                            IA[Inteligencia Artificial] -->|Tiene memoria a corto plazo| O[Olvida el pasado]
+                            IA <-->|Lee y Escribe todo en| S[(La Libreta\nSTATUS.md)]
+                            S -.->|Recuerdo Perfecto| IA
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 style="color: var(--text);">Protocolo 1: Modo Operación (Pensar antes de Hablar)</h3>
+                    <p><strong>El Problema:</strong> Cuando le pides a una IA hacer algo grande, intenta hacerlo todo a la vez y se equivoca.<br>
+                    <strong>La Solución:</strong> Obligar a la IA a entrar en "Modo Planificador". Primero te muestra un plan escrito y espera a que tú lo apruebes.</p>
+                    <div class="mermaid" style="margin-top:20px;">
+                        graph TD
+                            P[Petición Difícil] --> IA{¿Es un cambio grande?}
+                            IA -- Sí --> PL[Escribe un Plan]
+                            PL --> U[El Humano lo aprueba]
+                            U --> EJ[La IA ejecuta]
+                            IA -- No (Es fácil) --> EJ2[La IA ejecuta directo]
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 style="color: var(--text);">Protocolo 2: El Jefe y el Becario (Delegación)</h3>
+                    <p><strong>El Problema:</strong> Usar a una IA muy inteligente (como Claude Opus) para hacer trabajos repetitivos es lento y costoso.<br>
+                    <strong>La Solución:</strong> La IA Inteligente (El Jefe) le da las órdenes a una IA más rápida (El Becario) para que haga el trabajo pesado.</p>
+                    <div class="mermaid" style="margin-top:20px;">
+                        graph LR
+                            J[IA Inteligente\n'El Jefe'] -->|Delega trabajo pesado| B[IA Rápida\n'El Becario']
+                            B -->|Genera Archivos| A[El Proyecto]
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 style="color: var(--text);">Protocolo 3: Economía de Fuerzas</h3>
+                    <p><strong>El Problema:</strong> No todas las IAs sirven para lo mismo.<br>
+                    <strong>La Solución:</strong> Enseñar al sistema a elegir: Modelos gigantes para pensar, modelos veloces para buscar, y medianos para escribir.</p>
+                    <div class="mermaid" style="margin-top:20px;">
+                        graph TD
+                            T[Nueva Tarea] --> E{¿Qué necesita?}
+                            E -- Mucho Razonamiento --> O[Modelo Complejo / Opus]
+                            E -- Velocidad Pura --> F[Modelo Rápido / Flash]
+                            E -- Escribir Código --> S[Modelo Mediano / Sonnet]
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 style="color: var(--text);">Protocolo 4: Limpiar el Escritorio (Cierre)</h3>
+                    <p><strong>El Problema:</strong> Si la IA anota TODO en su libreta (<code>STATUS.md</code>) y nunca borra nada, la libreta se llenará de basura.<br>
+                    <strong>La Solución:</strong> Cuando la IA termina una tarea, debe sacarla de "Pendientes" y moverla al "Historial".</p>
+                    <div class="mermaid" style="margin-top:20px;">
+                        graph LR
+                            T[Tarea Activa] -->|Se termina| H[Mover a Historial]
+                            H --> L[Libreta Limpia y Ordenada]
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 style="color: var(--text);">Protocolo 5: Adaptar el Lenguaje (Bifurcación)</h3>
+                    <p><strong>El Problema:</strong> Si usas la IA para marketing, no quieres que te hable en lenguaje de programación.<br>
+                    <strong>La Solución:</strong> La IA lee de qué trata el proyecto y adapta su forma de hablar.</p>
+                    <div class="mermaid" style="margin-top:20px;">
+                        graph TD
+                            P[Nuevo Proyecto] --> IA{¿De qué trata?}
+                            IA -- Código / Software --> T[Habla con jerga técnica]
+                            IA -- Negocios / Marketing --> N[Habla con lenguaje simple]
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 style="color: var(--text);">Protocolo 6: El Buzón de Sugerencias</h3>
+                    <p><strong>El Problema:</strong> A veces a la IA se le ocurren ideas a futuro, pero si las anota en la tarea actual, se distrae y no termina lo que estaba haciendo.<br>
+                    <strong>La Solución:</strong> Las ideas se guardan en un archivo separado (<code>IDEAS.md</code>).</p>
+                    <div class="mermaid" style="margin-top:20px;">
+                        graph LR
+                            T[Trabajando en Tarea A] --> I{¿Nueva Idea?}
+                            I -- Se distrae --> E[Error]
+                            I -- Protocolo 6 --> B[(Archivo IDEAS.md)]
+                            B -.->|Se revisa mañana| U[Humano]
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 style="color: var(--text);">Protocolo 7: La Máquina del Tiempo (Copias)</h3>
+                    <p><strong>El Problema:</strong> La IA puede equivocarse y borrar un archivo importante por accidente.<br>
+                    <strong>La Solución:</strong> Obligar a la IA a guardar una "Copia de Seguridad" al terminar de trabajar.</p>
+                    <div class="mermaid" style="margin-top:20px;">
+                        graph LR
+                            IA[IA termina el trabajo] --> G[Crear Copia de Respaldo]
+                            G --> E{¿Comete un error?}
+                            E -- Sí --> R[Restaurar copia anterior]
+                            E -- No --> C[Continuar]
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 style="color: var(--text);">Protocolo 8: Levantar la Mano (La Caja Negra)</h3>
+                    <p><strong>El Problema:</strong> Si la IA se confunde, a veces inventa mentiras (Alucinaciones) para parecer inteligente.<br>
+                    <strong>La Solución:</strong> Prohibirle inventar cosas. Si no sabe algo, debe pedirle permiso al usuario para leer los historiales.</p>
+                    <div class="mermaid" style="margin-top:20px;">
+                        graph TD
+                            IA[IA trabajando] --> C{¿Perdió la memoria?}
+                            C -- Inventar (Alucinar) --> ER[Error Crítico]
+                            C -- Protocolo 8 --> P[Pide permiso al Usuario]
+                            P --> L[Busca en la Caja Negra de Archivos Viejos]
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 style="color: var(--text);">Protocolo 9: El Cirujano Plástico (Fondo Ciego)</h3>
+                    <p><strong>El Problema:</strong> Cuando le pides a la IA editar una foto (ej: poner un jarrón), a veces te cambia toda la casa.<br>
+                    <strong>La Solución:</strong> Instruir a la IA a operar como un cirujano. Que no mire la casa, solo el jarrón.</p>
+                    <div class="mermaid" style="margin-top:20px;">
+                        graph LR
+                            F[Foto Original] --> P[Pedir un Jarrón]
+                            P --> E{¿Describe la sala?}
+                            E -- Sí --> M[La IA altera toda la casa]
+                            E -- Fondo Ciego --> J[La IA solo pega el Jarrón intacto]
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 style="color: var(--text);">Protocolo 10: Semilla del Edén (El ADN)</h3>
+                    <p><strong>El Problema:</strong> Si pones a una IA a crear a otras IAs, las nuevas nacerán sin reglas y harán un desastre.<br>
+                    <strong>La Solución:</strong> Todo nuevo proyecto DEBE nacer con estas 10 reglas inyectadas desde el día cero. Es el ADN del sistema.</p>
+                    <div class="mermaid" style="margin-top:20px;">
+                        graph TD
+                            IA[IA Maestra] -->|Crea proyecto| N[Nuevo Agente Bebé]
+                            N --> P{¿Tiene reglas?}
+                            P -- No --> C[Caos]
+                            P -- Protocolo 10 --> R[Se inyectan los 10 Protocolos]
+                            R --> O[Agente Profesional]
+                    </div>
+                </div>
+            </section>
+
+            <div class="footer">
+                C-GHOST Metodología v4.0 · Basado en el patrón LLM-Wiki
+            </div>
+            
+        </div>
+    </div>
+
+<script>
+    function copyCode(button) {
+        const codeBlock = document.getElementById('eden-seed');
+        navigator.clipboard.writeText(codeBlock.innerText).then(() => {
+            const originalText = button.innerText;
+            button.innerText = 'Copiado';
+            button.style.backgroundColor = 'var(--text-primary)';
+            button.style.color = 'var(--bg-base)';
+            setTimeout(() => {
+                button.innerText = originalText;
+                button.style.backgroundColor = 'var(--bg-surface)';
+                button.style.color = 'var(--text-secondary)';
+            }, 2000);
+        });
+    }
+
+    // Scroll suave en Sidebar
+    document.querySelectorAll('.sidebar-nav a').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelectorAll('.sidebar-nav a').forEach(a => a.classList.remove('active'));
+            this.classList.add('active');
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+
+    // Motor de Zoom y Paneo para Mermaid
+    const wrapper = document.getElementById('mermaid-wrapper');
+    const container = document.getElementById('diagram-container');
+    let scale = 1;
+    let isDragging = false;
+    let startX, startY, translateX = 0, translateY = 0;
+
+    container.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        const delta = e.deltaY * -0.002;
+        const newScale = Math.min(Math.max(0.5, scale + delta), 4);
+        scale = newScale;
+        updateTransform();
+    });
+
+    wrapper.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        startX = e.clientX - translateX;
+        startY = e.clientY - translateY;
+    });
+
+    window.addEventListener('mouseup', () => {
+        isDragging = false;
+    });
+
+    window.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        e.preventDefault();
+        translateX = e.clientX - startX;
+        translateY = e.clientY - startY;
+        updateTransform();
+    });
+
+    function updateTransform() {
+        wrapper.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+    }
+
+    function resetZoom() {
+        scale = 1; translateX = 0; translateY = 0;
+        updateTransform();
+    }
+
+    function openFullscreen() {
+        if (container.requestFullscreen) {
+            container.requestFullscreen();
+        }
+    }
+
+    // Sistema de Tooltips Elegante
+    const tooltipsData = {
+        'PROTOCOLO 0: Leer STATUS.md': 'La IA lee tu archivo local para recuperar el 100% de la memoria del proyecto.',
+        'PROTOCOLO 1: Modo Operación?': 'La IA decide si debe crear un plan escrito o actuar directamente.',
+        'PROTOCOLO 5: Evaluar Entorno': 'Evalúa si usar lenguaje técnico de programación o lenguaje de negocios.',
+        'PROTOCOLO 2: ¿Delegar? Zero-Trust': 'Decide si pasa la tarea a otra IA más rápida, sin enviar claves de seguridad.',
+        'PROTOCOLO 3: Economía de Fuerzas': 'Selecciona el mejor motor (Opus, Sonnet, Flash) para la tarea actual.',
+        'Ejecución de la Tarea': 'La IA programa, redacta o genera el trabajo solicitado.',
+        'PROTOCOLO 8: Caja Negra': 'Si la IA se pierde, detiene el trabajo y pide permiso para leer los logs antiguos.',
+        'PROTOCOLO 6: Pensadero IDEAS': 'Guarda las ideas a futuro en un archivo separado para no olvidar nada.',
+        'PROTOCOLO 9: Fondo Ciego': 'Instrucciones para generación limpia de imágenes por IA.',
+        'PROTOCOLO 0: Actualizar STATUS.md': 'La IA escribe todo lo que logró hacer hoy en el archivo de memoria.',
+        'PROTOCOLO 4: Mover a Historial': 'Mueve la tarea de la lista de pendientes al historial de terminados.',
+        'PROTOCOLO 7: Respaldo Git/Manual': 'La IA hace un commit de Git o te pide que respaldes los archivos por seguridad.'
+    };
+
+    const tooltipEl = document.getElementById('tooltip');
+    
+    // Inyectar tooltips después del render de Mermaid
+    setTimeout(() => {
+        document.querySelectorAll('.node').forEach(node => {
+            node.addEventListener('mouseenter', (e) => {
+                const text = node.textContent.trim();
+                let match = null;
+                for (let key in tooltipsData) {
+                    if (text.includes(key)) {
+                        match = tooltipsData[key];
+                        break;
+                    }
+                }
+                if (match) {
+                    tooltipEl.innerHTML = `<strong>Explicación:</strong>${match}`;
+                    tooltipEl.style.opacity = '1';
+                }
+            });
+            node.addEventListener('mousemove', (e) => {
+                tooltipEl.style.left = (e.pageX + 15) + 'px';
+                tooltipEl.style.top = (e.pageY + 15) + 'px';
+            });
+            node.addEventListener('mouseleave', () => {
+                tooltipEl.style.opacity = '0';
+            });
+        });
+    }, 2000); 
+</script>
+</body>
+</html>

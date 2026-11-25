@@ -1,0 +1,30 @@
+# Licencia Dual — Metodología y Cerebro Operativo `C://GHOST`
+
+Copyright (c) 2026 José Dugarte (Dugui / C://GHOST)
+
+Este repositorio se distribuye bajo un esquema de **Licencia Dual** para maximizar la adopción abierta del código y proteger la atribución autoral de la doctrina metodológica:
+
+---
+
+## 1. Código, Scripts, Hooks y Plantillas — Licencia MIT
+
+Todo el código fuente, scripts ejecutables (`.sh`, `.py`), hooks (`.json`), y plantillas técnicas (`templates/`, `adapters/*/skills/*/scripts/`, `adapters/*/skills/*/templates/`) se licencian bajo la **MIT License**:
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+---
+
+## 2. Documentación, Manuales, Prompts y Teoría Metodológica — CC BY-SA 4.0
+
+Los manuales de usuario (`docs/manuals/`), el informe científico (`docs/informe_cientifico_metodologia.md`), la documentación doctrinal (`EVOLUTION.md`, `README.md`) y la especificación de los Protocolos `C://GHOST` se licencian bajo **Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)**:
+
+* **Eres libre de:** Compartir (copiar y redistribuir en cualquier medio o formato) y Adaptar (remezclar, transformar y construir a partir del material para cualquier propósito, incluso comercial).
+* **Bajo los siguientes términos:**
+  * **Atribución (BY):** Debes dar el crédito adecuado a **José Dugarte — Metodología C://GHOST**, enlazar a este repositorio e indicar si se realizaron cambios.
+  * **Compartir Igual (SA):** Si adaptas o construyes sobre esta metodología documental, debes distribuir tus contribuciones bajo la misma licencia `CC BY-SA 4.0`.
+
+Texto completo legal: https://creativecommons.org/licenses/by-sa/4.0/legalcode

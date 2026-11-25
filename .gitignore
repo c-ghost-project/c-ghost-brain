@@ -1,0 +1,16 @@
+.env
+.env.*
+!.env.example
+.secrets/
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa*
+id_ed25519*
+credentials*.json
+*service-account*.json
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
