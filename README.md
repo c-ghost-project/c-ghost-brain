@@ -1,5 +1,11 @@
 # 🧠 C://GHOST Brain — Metodología Universal de Gobernanza Cognitiva para Agentes de IA (`v3.0.0`)
 
+[![CI & Zero-Trust Gate](https://github.com/c-ghost-project/c-ghost-brain/actions/workflows/ci.yml/badge.svg)](https://github.com/c-ghost-project/c-ghost-brain/actions/workflows/ci.yml)
+[![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](./LICENSE)
+[![Docs: CC BY-SA 4.0](https://img.shields.io/badge/Docs-CC_BY--SA_4.0-lightgrey.svg)](./docs/LICENSE-DOCS)
+[![Release](https://img.shields.io/github/v/release/c-ghost-project/c-ghost-brain?include_prereleases&sort=semver)](https://github.com/c-ghost-project/c-ghost-brain/releases)
+[![GitHub Stars](https://img.shields.io/github/stars/c-ghost-project/c-ghost-brain?style=flat)](https://github.com/c-ghost-project/c-ghost-brain/stargazers)
+
 **Un sistema operativo de memoria viva, seguridad *Zero-Trust*, divulgación progresiva de *Skills* y orquestación multi-agente diseñado para eliminar la «Amnesia del Chat» en cualquier proyecto y con cualquier IA.**
 
 > Creado por **José Dugarte | Dugui - Metodología C-GHOST** · **Licencia:** Código y scripts bajo [**Apache 2.0**](./LICENSE) (con [`NOTICE`](./NOTICE) y blindaje de marca) · Manuales y doctrina bajo [**CC BY-SA 4.0**](./docs/LICENSE-DOCS) · Citación oficial en [`CITATION.cff`](./CITATION.cff).
