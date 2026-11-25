@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+title: "C://GHOST Brain — Metodología Universal de Gobernanza Cognitiva para Agentes de IA"
+message: "Si utilizas esta metodología, sus plantillas, hooks o adaptadores en proyectos de software, docencia, investigación o productos, por favor cítala usando el formato oficial: José Dugarte | Dugui - Metodología C-GHOST."
+type: software
+authors:
+  - family-names: "Dugarte"
+    given-names: "José"
+    alias: "Dugui"
+    affiliation: "C-GHOST"
+version: "3.0.0"
+date-released: "2026-11-24"
+license: "Apache-2.0"
+keywords:
+  - "ai-agents"
+  - "llm-governance"
+  - "c-ghost-methodology"
+  - "prompt-engineering"
+  - "zero-trust"
+  - "hermes-agent"
+  - "antigravity"
+  - "multi-agent-orchestration"
+preferred-citation:
+  type: manual
+  title: "Metodología C-GHOST: Gobernanza Cognitiva, Memoria Viva y Orquestación Multi-Agente (v3.0.0)"
+  authors:
+    - family-names: "Dugarte"
+      given-names: "José"
+      alias: "Dugui"
+  year: 2026
+  notes: "Atribución oficial: José Dugarte | Dugui - Metodología C-GHOST"

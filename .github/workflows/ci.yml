@@ -1,0 +1,58 @@
+name: C-GHOST Brain CI & Zero-Trust Gate
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  pull_request:
+    branches: [main]
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python 3
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate shell scripts, JSON hooks, and Python AST
+        run: |
+          bash -n plant-seed.sh templates/hooks/*.sh
+          python3 -m json.tool templates/hooks.universal.json >/dev/null
+          PYTHONDONTWRITEBYTECODE=1 python3 -c "import ast; ast.parse(open('adapters/hermes/skills/c-ghost-seed/scripts/init_c_ghost.py').read())"
+
+      - name: Zero-Trust privacy and secret hygiene check
+        run: |
+          if grep -rnE "/home/[a-zA-Z0-9._-]+/|/Users/[a-zA-Z0-9._-]+/|BEGIN (RSA |EC |OPENSSH )?PRIVATE KEY" . \
+            --exclude-dir=.git --exclude='*.png' --exclude='*.pdf' --exclude='CONTRIBUTING.md' --exclude='PULL_REQUEST_TEMPLATE.md' --exclude='ci.yml'; then
+            echo "ERROR: Personal path or secret marker detected in repository."
+            exit 1
+          fi
+
+      - name: Smoke test v3.0 Universal seeder & Lifecycle Hooks
+        run: |
+          TMP_DIR="$(mktemp -d)"
+          ./plant-seed.sh "$TMP_DIR/demo-v3" "CI Demo V3"
+          test -L "$TMP_DIR/demo-v3/AGENTS.md"
+          test -f "$TMP_DIR/demo-v3/.agents/hooks.json"
+          echo '{}' | "$TMP_DIR/demo-v3/.agents/hooks/session-start.sh" | python3 -c "import json,sys; assert 'injectSteps' in json.load(sys.stdin)"
+          echo '{"toolCall":{"name":"run_command","args":{"CommandLine":"git add .env"}}}' | "$TMP_DIR/demo-v3/.agents/hooks/pre-tool-guard.sh" | python3 -c "import json,sys; assert json.load(sys.stdin)['decision']=='deny'"
+          echo '{"toolCall":{"name":"run_command","args":{"CommandLine":"git add .env.example"}}}' | "$TMP_DIR/demo-v3/.agents/hooks/pre-tool-guard.sh" | python3 -c "import json,sys; assert json.load(sys.stdin)['decision']=='allow'"
+          echo '{"terminationReason":"NO_TOOL_CALL","continuationActive":false}' | "$TMP_DIR/demo-v3/.agents/hooks/stop-gate.sh" | python3 -c "import json,sys; assert json.load(sys.stdin)['decision']=='allow'"
+          python3 -c "open('$TMP_DIR/demo-v3/STATUS.md','a').write('\n'*110)"
+          echo '{"terminationReason":"NO_TOOL_CALL","continuationActive":false}' | "$TMP_DIR/demo-v3/.agents/hooks/stop-gate.sh" | python3 -c "import json,sys; assert json.load(sys.stdin)['decision']=='continue'"
+          echo '{"terminationReason":"NO_TOOL_CALL","continuationActive":true}' | "$TMP_DIR/demo-v3/.agents/hooks/stop-gate.sh" | python3 -c "import json,sys; assert json.load(sys.stdin)['decision']=='allow'"
+
+      - name: Smoke test v2.1 Hermes seeder, preflight & migration
+        run: |
+          TMP_DIR="$(mktemp -d)"
+          PYTHONDONTWRITEBYTECODE=1 python3 adapters/hermes/skills/c-ghost-seed/scripts/init_c_ghost.py \
+            --dir "$TMP_DIR/demo-hermes" --name "CI Demo Hermes" --org "Community" --stack "Python 3.12"
+          (cd "$TMP_DIR/demo-hermes" && ./.agents/scripts/preflight_check.sh && bash -n .agents/scripts/preflight_check.sh)
+          PYTHONDONTWRITEBYTECODE=1 python3 -c "import ast, glob; [ast.parse(open(f).read()) for f in glob.glob('$TMP_DIR/demo-hermes/.agents/scripts/*.py')]"
+          PYTHONDONTWRITEBYTECODE=1 python3 adapters/hermes/skills/c-ghost-seed/scripts/init_c_ghost.py \
+            --dir "$TMP_DIR/demo-hermes" --name "CI Demo Hermes" --migrate

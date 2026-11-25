@@ -1,0 +1,24 @@
+C://GHOST Brain — Metodología de Gobernanza Cognitiva para Agentes de IA
+Copyright 2026 José Dugarte | Dugui - Metodología C-GHOST
+
+Atribución Obligatoria (Apache License 2.0, Sección 4(d)):
+Este producto o proyecto incluye software, plantillas, scripts y protocolos
+desarrollados originalmente por:
+
+    José Dugarte | Dugui - Metodología C-GHOST
+
+Cualquier redistribución, obra derivada, adaptación o integración (comercial,
+académica o personal) debe conservar este aviso de atribución de forma visible
+en su archivo NOTICE, documentación o créditos del proyecto.
+
+Aviso de Marca (Apache License 2.0, Sección 6):
+Las denominaciones "C://GHOST", "C-GHOST", "C-GHOST Brain", "Dugui" y
+"DUGUI DEVELOPER" son marcas e identidades propias de José Dugarte. La licencia
+Apache 2.0 no otorga permiso para utilizar dichas marcas con el fin de
+presentar forks, productos, cursos o servicios de terceros como oficiales o
+avalados sin autorización previa por escrito.
+
+Licencia de Documentación:
+Los manuales, diagramas, prompts doctrinales e informes ubicados en `docs/`
+están licenciados adicionalmente bajo Creative Commons Attribution-ShareAlike
+4.0 International (CC BY-SA 4.0) — véase `docs/LICENSE-DOCS`.

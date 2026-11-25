@@ -1,0 +1,23 @@
+# Licencia de Documentación y Doctrina — CC BY-SA 4.0
+
+Los manuales de usuario (`docs/manuals/`), diagramas, el informe científico (`docs/informe_cientifico_metodologia.md`), la línea evolutiva (`EVOLUTION.md`) y la doctrina escrita de la **Metodología C-GHOST** se publican bajo la licencia:
+
+**Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)**  
+Texto legal oficial completo: https://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+---
+
+## Eres libre de:
+* **Compartir** — copiar y redistribuir el material en cualquier medio o formato para cualquier propósito, incluso comercial y educativo.
+* **Adaptar** — remezclar, transformar y construir a partir del material para cualquier propósito, incluso comercial.
+
+## Bajo los siguientes términos obligatorios:
+1. **Atribución (`BY`):** Debes otorgar el crédito explícito en todo tipo de proyecto, repositorio, publicación, clase o producto derivado utilizando exactamente la atribución oficial:
+
+   > **Crédito obligatorio:** `José Dugarte | Dugui - Metodología C-GHOST`  
+   > *(Incluir enlace al repositorio original e indicar claramente si se realizaron modificaciones).*
+
+2. **Compartir Igual (`SA`):** Si adaptas, traduces o construyes documentación derivada sobre esta metodología, debes distribuir tus aportes documentales bajo la misma licencia **CC BY-SA 4.0**.
+3. **Respeto de Marca:** Los derivados de terceros no pueden sugerir respaldo oficial ni suplantar las marcas `C://GHOST` o `Dugui`.
+
+> Para el código fuente, scripts ejecutables, hooks y plantillas técnicas de este repositorio aplica la licencia **Apache 2.0** junto con el archivo [`NOTICE`](../NOTICE) en la raíz del proyecto.

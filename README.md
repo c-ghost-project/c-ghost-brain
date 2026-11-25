@@ -2,7 +2,7 @@
 
 **Un sistema operativo de memoria viva, seguridad *Zero-Trust*, divulgación progresiva de *Skills* y orquestación multi-agente diseñado para eliminar la «Amnesia del Chat» en cualquier proyecto y con cualquier IA.**
 
-> Creado por **José Dugarte (`Dugui` / `C://GHOST`)** · **Licencia Dual:** Código y scripts bajo **MIT** · Doctrina y manuales bajo **CC BY-SA 4.0** ([`LICENSE`](./LICENSE)).
+> Creado por **José Dugarte | Dugui - Metodología C-GHOST** · **Licencia:** Código y scripts bajo [**Apache 2.0**](./LICENSE) (con [`NOTICE`](./NOTICE) y blindaje de marca) · Manuales y doctrina bajo [**CC BY-SA 4.0**](./docs/LICENSE-DOCS) · Citación oficial en [`CITATION.cff`](./CITATION.cff).
 
 ---
 
@@ -49,8 +49,13 @@ Cada generación del cerebro incluye su **propio manual completo paso a paso** p
 c-ghost-brain/
 ├── README.md                          # Portada y guía rápida
 ├── EVOLUTION.md                       # Evolución v1.0 → v2.0 → v2.1 → v3.0
-├── CONTRIBUTING.md                    # Reglas para colaboradores
-├── LICENSE                            # Licencia Dual (MIT + CC BY-SA 4.0)
+├── CONTRIBUTING.md                    # Reglas DCO y guía para contribuyentes
+├── CODE_OF_CONDUCT.md                 # Normas comunitarias
+├── SECURITY.md                        # Política de divulgación responsable
+├── CITATION.cff                       # Botón oficial "Cite this repository" (APA / BibTeX)
+├── NOTICE                             # Atribución oficial obligatoria y aviso de marca
+├── LICENSE                            # Apache License 2.0 (código, scripts y plantillas)
+├── .github/                           # Plantillas de Issues/PRs + GitHub Actions CI
 ├── 01_PROMPT_MARCAR_LA_SEMILLA.md     # 🌱 Prompt 1 autocontenido (Semilla Virgen v3.0)
 ├── 02_PROMPT_ADAPTAR_AL_PROYECTO.md   # 🦎 Prompt 2 camaleónico (Adaptación al proyecto)
 ├── plant-seed.sh                      # ⚡ Sembrador CLI agnóstico v3.0
@@ -89,3 +94,19 @@ c-ghost-brain/
 * **Zero-Trust por defecto:** Bloqueo mecánico de commits con `.env`, `.secrets/`, llaves SSH/TLS o credenciales JSON (sin bloquear `.env.example`).
 * **Memoria viva acotada (`≤ 100` líneas):** Validada automáticamente en el cierre de cada turno mediante `stop-gate.sh` (con `continuationActive` anti-bucle) y en Hermes mediante `preflight_check.sh`.
 * **100% auditable y sin dependencias ocultas:** Todos los sembradores y hooks funcionan exclusivamente con Bash POSIX + biblioteca estándar de Python 3.8+.
+
+---
+
+## 📜 Licencias y Atribución Oficial
+
+* **Código, scripts, hooks y plantillas:** [**Apache License 2.0**](./LICENSE) *(protección explícita de marca en Sección 6 + conservación obligatoria de [`NOTICE`](./NOTICE))*.
+* **Manuales, diagramas e informe científico (`docs/`):** [**Creative Commons CC BY-SA 4.0**](./docs/LICENSE-DOCS) *(abierto para uso personal, académico y comercial con atribución obligatoria y compartir igual)*.
+
+Si utilizas o adaptas este cerebro en cualquier proyecto, incluye la atribución oficial:
+
+```text
+Basado en C://GHOST Brain — José Dugarte | Dugui - Metodología C-GHOST
+```
+
+También puedes copiar la cita académica en formato **APA** o **BibTeX** usando el botón **«Cite this repository»** de GitHub ([`CITATION.cff`](./CITATION.cff)).
+

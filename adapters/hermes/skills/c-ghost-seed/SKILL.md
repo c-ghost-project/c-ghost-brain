@@ -2,8 +2,8 @@
 name: c-ghost-seed
 description: "Bootstrap C://GHOST v2.1 brain files in any new project."
 version: 2.1.0
-author: Dugui & Hermes Agent
-license: MIT
+author: José Dugarte | Dugui - Metodología C-GHOST
+license: Apache-2.0
 platforms: [linux, macos, windows]
 metadata:
   hermes:
