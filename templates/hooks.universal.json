@@ -1,0 +1,37 @@
+{
+  "cghost-cockpit-boot": {
+    "enabled": true,
+    "SessionStart": [
+      {
+        "type": "command",
+        "command": "./hooks/session-start.sh",
+        "timeout": 5
+      }
+    ]
+  },
+  "zero-trust-and-commit-gate": {
+    "enabled": true,
+    "PreToolUse": [
+      {
+        "matcher": "run_command",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "./hooks/pre-tool-guard.sh",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  },
+  "cghost-stop-gate": {
+    "enabled": true,
+    "Stop": [
+      {
+        "type": "command",
+        "command": "./hooks/stop-gate.sh",
+        "timeout": 10
+      }
+    ]
+  }
+}
