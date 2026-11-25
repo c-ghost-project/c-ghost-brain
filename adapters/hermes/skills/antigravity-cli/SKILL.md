@@ -61,7 +61,7 @@ Always launch non-interactively in background using `terminal` with `background=
 
 ## Procedure
 
-0. **Puertas previas (C://GHOST v2.1, obligatorias).** Desde la raíz del proyecto: ejecuta `./.agents/scripts/preflight_check.sh` (solo exit 0 permite continuar, Protocolo 11) y `./.agents/scripts/quota_tracker.py check` (si `cuota_antigravity_usada` supera el 80%, alerta y pide confirmación explícita al Comandante antes de gastar cuota). Adjunta la salida del preflight al handoff como `[PREFLIGHT_REPORT]`.
+0. **Puertas previas (C://GHOST v2.1, obligatorias).** Desde la raíz del proyecto: ejecuta `./.agents/scripts/preflight_check.sh` (solo exit 0 permite continuar, Protocolo 11) y `./.agents/scripts/quota_tracker.py check` (si `cuota_antigravity_usada` supera el 80%, alerta y pide confirmación explícita al Creador antes de gastar cuota). Adjunta la salida del preflight al handoff como `[PREFLIGHT_REPORT]`.
 1. Build a C://GHOST **5-field Handoff** inside the `-p` prompt:
    - `[SKILL REQUERIDA]` (project skill in `.agents/skills/` if any)
    - `[OBJETIVO ATÓMICO]`

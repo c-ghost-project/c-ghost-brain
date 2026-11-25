@@ -1,7 +1,7 @@
 # INFORME EJECUTIVO — C://GHOST v2.1 (Optimizado)
 
 **Fecha:** 2026-11-23
-**Autor:** Hermes Agent (estratega del Comandante Dugui)
+**Autor:** Hermes Agent (estratega del Creador (José Dugarte | Dugui))
 **Versión del cerebro:** v2.1.0
 **Cambio principal:** de 10 a 12 protocolos, de 3 a 4 fases cognitivas, de 4 a 5 niveles de automatización, con 4 scripts determinísticos de soporte.
 
@@ -137,7 +137,7 @@ Salida:
 }
 ```
 
-Si `confianza < 0.75` → Hermes pregunta al Comandante en lugar de asumir.
+Si `confianza < 0.75` → Hermes pregunta al Creador en lugar de asumir.
 
 ---
 

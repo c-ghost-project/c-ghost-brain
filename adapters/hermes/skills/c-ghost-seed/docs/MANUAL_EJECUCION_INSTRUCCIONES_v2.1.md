@@ -1,6 +1,6 @@
 # MANUAL DE EJECUCIÓN DE INSTRUCCIONES — C://GHOST v2.1
 
-**Versión:** 2.1.0 | **Audiencia:** Comandante (tú) | **Objetivo:** Entender qué pasa tras cada instrucción y cómo influir sin romper la automatización.
+**Versión:** 2.1.0 | **Audiencia:** El Creador (tú) | **Objetivo:** Entender qué pasa tras cada instrucción y cómo influir sin romper la automatización.
 
 ---
 
@@ -17,7 +17,7 @@
 | "cambia a modelo Carbon" | Se ignora. El modelo es consecuencia del **nivel**, no una elección. |
 
 **Regla de oro (P1 Zero-Command Routing):**
-> *El Comandante define **QUÉ** quiere (intención/resultado). Hermes decide **CÓMO** (nivel, skill, modelo, background/foreground).*
+> *El Creador define **QUÉ** quiere (intención/resultado). Hermes decide **CÓMO** (nivel, skill, modelo, background/foreground).*
 
 ---
 
@@ -25,7 +25,7 @@
 
 ```mermaid
 sequenceDiagram
-    participant U as Comandante
+    participant U as Creador
     participant H as Hermes (Nivel 1)
     participant PF as preflight_check.sh (Nivel 0)
     participant IC as intent_classify.py (Pre-P1)

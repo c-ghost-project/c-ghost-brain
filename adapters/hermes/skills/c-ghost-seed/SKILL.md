@@ -100,7 +100,7 @@ Antes de ejecutar, verifica el destino con `terminal("ls -la /ruta/al/proyecto")
 - **Descripción de skill demasiado larga.** El frontmatter de cada skill de pilar admite un máximo de 60 caracteres en `description`. El script recorta automáticamente, pero revisa el resultado.
 - **Ejecutar sin Python 3.** Verifica con `terminal("python3 --version")` antes de culpar al script.
 - **Olvidar el preflight antes de delegar.** El Protocolo 11 es obligatorio: sin `preflight_check.sh` en verde, no armes handoffs a Nivel 2 o 3.
-- **Ignorar la cuota Antigravity.** Antes de usar Nivel 3, ejecuta `quota_tracker.py check`. Si supera 80%, pide confirmación al Comandante.
+- **Ignorar la cuota Antigravity.** Antes de usar Nivel 3, ejecuta `quota_tracker.py check`. Si supera 80%, pide confirmación al Creador.
 - **Embeber código generado en strings no-raw.** Toda función de `init_c_ghost.py` que retorne el texto de un script embebido debe usar raw string (`r'''...'''`): un `\n`, `\s` u otro escape dentro del código generado se interpreta en el parser exterior y corrompe el archivo destino (p. ej. `SyntaxError: unterminated string literal` en el script generado). Tras sembrar, compila SIEMPRE los scripts generados, no solo el inicializador.
 
 ## Documentación de referencia (docs/)

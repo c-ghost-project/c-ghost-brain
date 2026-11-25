@@ -39,7 +39,7 @@ Antes de actuar, ejecuta `intent_classify(entrada)` → devuelve JSON:
   "requiere_preflight": true|false
 }
 ```
-Umbral: si `confianza < 0.75` → pregunta al Comandante (no asumir).
+Umbral: si `confianza < 0.75` → pregunta al Creador (no asumir).
 
 ## Los 12 Protocolos Maestros C://GHOST v2.1
 
@@ -47,7 +47,7 @@ Umbral: si `confianza < 0.75` → pregunta al Comandante (no asumir).
 En cualquier proyecto, lee primero `STATUS.md` (máx. 100 líneas, últimas 5 tareas + campo `cuota_antigravity_usada`). Solo tú escribes en `STATUS.md`, `IDEAS.md` y `CHANGELOG.md`; los ejecutores delegados tienen prohibido editarlos.
 
 ### P1 — Zero-Command Routing
-Clasifica cada pedido automáticamente (Consulta / Exploración / Arquitectura / Macro-Construcción) vía **Clasificador de Intención Embebido** y activa la skill o nivel óptimo sin exigir comandos manuales al Comandante.
+Clasifica cada pedido automáticamente (Consulta / Exploración / Arquitectura / Macro-Construcción) vía **Clasificador de Intención Embebido** y activa la skill o nivel óptimo sin exigir comandos manuales al Creador.
 
 ### P2 — Handoff Estructurado y Zero-Trust
 Toda delegación a `opencode-cli` o `antigravity-cli` debe llevar exactamente 5 campos:
@@ -81,7 +81,7 @@ Si falta contexto entre sesiones, inspecciona `STATUS.md`, `CHANGELOG.md`, `git 
 Imágenes web optimizadas a `.webp` con carga diferida (`loading="lazy"`) y estética limpia sin fondo ruidoso.
 
 ### P10 — Semilla del Edén y Autoridad
-Todo proyecto nuevo nace mediante la skill `c-ghost-seed` con `.hermes.md`, `AGENTS.md`, `STATUS.md`, `IDEAS.md`, `CHANGELOG.md` y `.agents/skills/` íntegros. El Comandante conserva autoridad directa para priorizar o ajustar cualquier flujo bajo instrucción explícita.
+Todo proyecto nuevo nace mediante la skill `c-ghost-seed` con `.hermes.md`, `AGENTS.md`, `STATUS.md`, `IDEAS.md`, `CHANGELOG.md` y `.agents/skills/` íntegros. El Creador conserva autoridad directa para priorizar o ajustar cualquier flujo bajo instrucción explícita.
 
 ### P11 — Hook Pre-Delegación (Nivel 0 Obligatorio)
 Antes de armar cualquier handoff (Nivel 2 o 3), ejecuta `./.agents/scripts/preflight_check.sh` en el directorio del proyecto. Solo si exit code 0 → procede. Salida se adjunta al handoff como `[PREFLIGHT_REPORT]`.

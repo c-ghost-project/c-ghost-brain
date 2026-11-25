@@ -31,7 +31,7 @@ Una sola IA no puede pensar la estrategia general y a la vez escribir 5,000 lín
 
 ```mermaid
 graph TD
-  U[Usuario / Comandante] -->|Da la visión| E[IA Estratega\n'Steve Jobs']
+  U[Usuario / Creador] -->|Da la visión| E[IA Estratega\n'Steve Jobs']
   E <-->|Planifica y Actualiza| S[(STATUS.md)]
   E -->|Delega trabajo pesado| W[IA Ejecutora\n'Steve Wozniak']
   W <-->|Lee reglas y reporta| S
@@ -129,7 +129,7 @@ Para inyección visual: omite descripciones del entorno y describe solo al sujet
 ### 🏛️ PROTOCOLO 10 — LEYES DE GOBERNANZA SUBORDINADA (PRIME DIRECTIVES)
 1. **Semilla del Edén:** Todo proyecto debe nacer con `STATUS.md` y `AGENTS.md` completos. Está PROHIBIDO resumir los protocolos.
 2. **Mente Colmena:** El conocimiento profundo se documenta para uso global.
-3. **Comandante Override:** El usuario creador tiene autoridad absoluta para saltar protocolos y dar órdenes directas.
+3. **Creator Override (Autoridad del Creador):** El usuario creador tiene autoridad absoluta para saltar protocolos y dar órdenes directas.
 
 ### ⚠️ REGLAS LOCALES ESTRICTAS
 1. Antes de iniciar cualquier tarea, debes leer el `STATUS.md`.

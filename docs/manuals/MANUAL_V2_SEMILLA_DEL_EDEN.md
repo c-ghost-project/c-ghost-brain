@@ -64,7 +64,7 @@ Asegúrate de que la sección `## 🎯 Tarea Activa` indique un único objetivo 
 
 ## 4. Cómo Operar Solo Día a Día (El Bucle Cognitivo de 3 Fases)
 
-Una vez sembrado el cerebro, tu trabajo como Comandante del proyecto se simplifica a tres reglas de oro:
+Una vez sembrado el cerebro, tu trabajo como Creador del proyecto se simplifica a tres reglas de oro:
 
 1. **Inicio de sesión (Fase 1):**  
    Solo dile al agente qué hito quieres abordar (o escribe *"Lee STATUS.md y dime cuál es el siguiente paso"*). El agente ejecutará el **Protocolo 0** (leer `STATUS.md`), activará solo la Skill correspondiente y te presentará un plan si el cambio es estructural.
